@@ -50,60 +50,96 @@
             opacity: 0.9;
         }
 
+        /* 优化主布局 */
         .hero-section {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--gap);
+            grid-template-columns: 1.25fr 1fr;
+            gap: 4rem;
             align-items: center;
-            margin-bottom: var(--gap);
+            margin: 3rem 0;
         }
 
         .screenshot-container {
             position: relative;
-            padding-bottom: min(70%, 600px);
-            border-radius: var(--radius);
+            border-radius: 1.2rem;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.15);
             background: #f8f9fa;
+            aspect-ratio: 16/9;
         }
 
         .screenshot {
-            position: absolute;
             width: 100%;
             height: 100%;
             object-fit: contain;
-            object-position: center;
-            padding: 5%;
-            transition: transform 0.3s ease;
+            padding: 8%;
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        /* 右侧内容区 */
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            padding: 2rem 0;
         }
 
         .version-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: clamp(12px, 2vw, 20px);
-            margin: clamp(16px, 3vw, 24px) 0;
+            margin: 2.5rem 0 1.5rem;
         }
 
         .version-card {
             background: white;
-            padding: clamp(16px, 3vw, 20px);
+            padding: 2rem;
             border-radius: var(--radius);
             text-align: center;
             border: 2px solid var(--primary);
-            transition: box-shadow 0.3s;
+            transition: all 0.3s;
         }
 
-        .version-card:hover {
-            box-shadow: 0 6px 16px rgba(76,175,80,0.15);
+        /* 下载按钮增强 */
+        .download-btn {
+            background: linear-gradient(135deg, #43A047 0%, #4CAF50 100%);
+            color: white!important;
+            padding: 1.2rem 2.8rem;
+            border-radius: 2.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(76,175,80,0.2);
+            transition: all 0.3s;
+            gap: 8px;
         }
 
-        .version-title {
-            color: var(--primary);
-            font-weight: 700;
-            font-size: clamp(1.1rem, 4vw, 1.3rem);
-            margin-bottom: 0.8em;
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(76,175,80,0.3);
         }
 
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .screenshot-container {
+                order: -1;
+                aspect-ratio: 4/3;
+                margin-bottom: 1rem;
+            }
+            
+            .download-btn {
+                width: 100%;
+                max-width: 280px;
+                margin: 1rem auto;
+            }
+        }
+
+        /* 其他样式保持原样 */
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -123,86 +159,6 @@
             justify-content: center;
         }
 
-        .feature-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-        }
-
-        .feature-item h3 {
-            font-size: clamp(1.1rem, 3.5vw, 1.3rem);
-            margin-bottom: 0.8em;
-            line-height: 1.3;
-        }
-
-        .feature-item p {
-            font-size: clamp(0.9rem, 2.5vw, 1rem);
-            line-height: 1.7;
-            color: #555;
-        }
-
-        .industry-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: clamp(12px, 2vw, 16px);
-            margin: clamp(24px, 4vw, 32px) 0;
-        }
-
-        .industry-card {
-            padding: clamp(12px, 2vw, 16px);
-            text-align: center;
-            background: var(--secondary);
-            border-radius: var(--radius);
-            transition: transform 0.3s;
-        }
-
-        .industry-card h4 {
-            font-size: clamp(1rem, 3.5vw, 1.1rem);
-            margin-bottom: 0.6em;
-        }
-
-        .industry-card p {
-            font-size: clamp(0.85rem, 3vw, 0.95rem);
-            color: #444;
-        }
-
-        .download-btn {
-            background: var(--primary);
-            color: white!important;
-            padding: clamp(10px, 2vw, 12px) clamp(24px, 4vw, 36px);
-            border-radius: 50px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin: 10px;
-            text-decoration: none;
-            font-size: clamp(0.95rem, 2.8vw, 1.05rem);
-            transition: all 0.3s;
-            gap: 8px;
-        }
-
-        .download-btn:hover {
-            opacity: 0.95;
-            transform: scale(1.02);
-        }
-
-        @media (max-width: 480px) {
-            .screenshot {
-                object-position: top center;
-            }
-            .download-btn {
-                width: 100%;
-                margin: 8px 0;
-            }
-        }
-
-        .section-title {
-            font-size: clamp(1.3rem, 4vw, 1.6rem);
-            margin: clamp(24px, 4vw, 32px) 0;
-            text-align: center;
-            color: var(--primary);
-            position: relative;
-        }
-
         footer {
             background: var(--secondary);
             padding: clamp(16px, 3vw, 24px);
@@ -211,43 +167,9 @@
             border-radius: var(--radius);
             font-size: clamp(0.85rem, 3vw, 0.95rem);
         }
-        /* 新增或修改以下样式 */
-.screenshot-container {
-    position: relative;
-    padding-bottom: min(56.25%, 600px); /* 改为16:9比例容器 */
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    background: #f8f9fa;
-    aspect-ratio: 16/9; /* 新增宽高比约束 */
-}
-
-.screenshot {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* 保持比例完整显示 */
-    object-position: center;
-    padding: 0; /* 去除内边距 */
-    transition: transform 0.3s ease;
-    max-width: 100%; /* 新增最大宽度约束 */
-}
-
-/* 新增移动端适配 */
-@media (max-width: 768px) {
-    .hero-section {
-        grid-template-columns: 1fr;
-        margin-bottom: 2rem;
-    }
-    
-    .screenshot-container {
-        order: -1; /* 移动端优先显示图片 */
-        margin-bottom: 1.5rem;
-    }
-}
     </style>
     <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
-<script>LA.init({id:"3LR2aeQvQn64ZPBe",ck:"3LR2aeQvQn64ZPBe"})</script>
+    <script>LA.init({id:"3LR2aeQvQn64ZPBe",ck:"3LR2aeQvQn64ZPBe"})</script>
 </head>
 <body>
     <nav class="nav-bar">
@@ -257,22 +179,33 @@
 
     <section class="hero-section">
         <div class="screenshot-container">
-            <img src="watermark.jpg" 
+            <img src="images/watermark.jpg" 
                  class="screenshot" 
                  alt="今日水印相机界面"
                  loading="lazy"
-                 srcset="watermark.jpg>
+                 srcset="images/watermark.jpg>
         </div>
-        <div>
+        
+        <div class="hero-content">
             <h1 class="section-title">今日水印相机 4.0.9.0国际专业版</h1>
+            
             <div class="version-grid">
                 <div class="version-card">
-                    <a href="https://pan.quark.cn/s/dbf0d8471f68" class="download-btn">
+                    <a href="https://pan.quark.cn/s/dbf0d8471f68" 
+                       class="download-btn"
+                       download="WatermarkCamera_Pro_v4.0.9.0.apk">
                         <i class="fas fa-download"></i>
-                        立即下载
+                        立即下载完整版
                     </a>
                 </div>
-                         </div>
+            </div>
+            
+            <ul class="version-features">
+                <li>✅ 永久去除所有广告</li>
+                <li>✅ 解锁VIP专属滤镜</li>
+                <li>✅ 支持4K超清导出</li>
+                <li>✅ 团队管理功能增强</li>
+            </ul>
         </div>
     </section>
 
@@ -296,7 +229,7 @@
         </div>
     </section>
 
-    <section style="text-align: center; margin: clamp(32px, 5vw, 48px) 0;">
+  <section style="text-align: center; margin: clamp(32px, 5vw, 48px) 0;">
         <h2 class="section-title">立即获取专业版</h2>
         <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
             <a href="https://pan.quark.cn/s/dbf0d8471f68" class="download-btn">
@@ -308,10 +241,10 @@
             支持Windows 10+/Android 8.0+/iOS 13+系统
         </p>
     </section>
-  <footer>
+    <footer>
         <div class="container">
-            <div class="mb-3">
-                  <a href="https://pan.quark.cn/s/89acf482fd64">软件合集</a>
+            <div style="margin-bottom: 1rem;">
+                <a href="https://pan.quark.cn/s/89acf482fd64" style="margin: 0 1rem;">软件合集</a>
                 <a href="https://pan.quark.cn/s/daa0a68d49cf">游戏合集</a>
             </div>
             <small>关注公众号获取更新：软件挖掘机</small>
