@@ -211,6 +211,40 @@
             border-radius: var(--radius);
             font-size: clamp(0.85rem, 3vw, 0.95rem);
         }
+        /* 新增或修改以下样式 */
+.screenshot-container {
+    position: relative;
+    padding-bottom: min(56.25%, 600px); /* 改为16:9比例容器 */
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    background: #f8f9fa;
+    aspect-ratio: 16/9; /* 新增宽高比约束 */
+}
+
+.screenshot {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* 保持比例完整显示 */
+    object-position: center;
+    padding: 0; /* 去除内边距 */
+    transition: transform 0.3s ease;
+    max-width: 100%; /* 新增最大宽度约束 */
+}
+
+/* 新增移动端适配 */
+@media (max-width: 768px) {
+    .hero-section {
+        grid-template-columns: 1fr;
+        margin-bottom: 2rem;
+    }
+    
+    .screenshot-container {
+        order: -1; /* 移动端优先显示图片 */
+        margin-bottom: 1.5rem;
+    }
+}
     </style>
     <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
 <script>LA.init({id:"3LR2aeQvQn64ZPBe",ck:"3LR2aeQvQn64ZPBe"})</script>
